@@ -1,0 +1,46 @@
+// Project 3 Task 1
+/* For this program, the goal was to print the episode that hasn't been watched 
+by Yuka. This program takes user input of number of episodes and which ones were
+watched and then stores that input into an array. After checking which index in 
+the array hasn't been marked, it then prints the missing epidode Yuka hasn't 
+watched. I used for loops to store the number of watched episdoes and an if statement
+to check the missing episode for my program.
+*/
+
+#include <stdio.h>
+
+int main() {
+    // initializing variables
+    int num;
+    int episodes;
+
+    // prompt user to input number of episodes in the series
+    printf("Enter number of episodes: ");
+    scanf("%d", &num);
+
+    // prompt user to enter episodes watched
+    printf("Enter episodes watched: ");
+
+    // initialize array to hold the episodes
+    int watched[num]; 
+    for (int i = 1; i <= num + 1; i++) {
+        watched[i] = 0;
+    }
+
+    for (int i = 1; i < num; i++) {
+        scanf("%d", &episodes);
+        // marking episode as watched
+        watched[episodes] = 1;
+    }
+
+    // finding the unwatched episode
+    for (int i = 1; i <= num; i++) {
+        // if an episode wasn't watched, print it in the output
+        if (watched[i] == 0) {
+            printf("Missing episode: %d\n", i); 
+            break;
+        }
+    }
+
+    return 0;
+}
