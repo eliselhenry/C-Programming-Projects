@@ -1,0 +1,82 @@
+// Project 3 Task 2
+/* In this program, the coach of a debate team wants to form teams of students
+ based on their proficiency on past debates. Teams are sorted into three categories:
+ Beginner at 25 points, Honor at 70 points, and Excellence at 125 points. This program 
+ assigns students to a team based on the one they're total points are closest to. The
+ program reads user input of the number of students, and their points. It uses one array 
+ to store those points and another array to store their assigned team. Then it prints the 
+ students in their categorized teams.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// function to store the two arrays of points and team assignments for each student
+void assign(int points[], int team_assignment[], int n){
+    
+    for (int i = 0; i < n; i++){
+        // initializing team variables and using 'abs' to return the absolute value of points difference
+        int beginner = abs(points[i] - 25); 
+        int honor = abs(points[i] - 70);
+        int excellence = abs(points[i] - 125);
+
+        // checking beginner team
+        if (beginner <= honor && beginner <= excellence){
+            team_assignment[i] = 1;
+        }  
+        // checking honor team
+        else if (honor <= beginner && honor <= excellence){
+            team_assignment [i] = 2;
+        }
+        // checking excellence team
+        else{
+            team_assignment[i] = 3;
+        }
+    }
+}
+
+// main function used to return (print) the teams of students based on their points
+int main(){
+    int n; // initializing number of students
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    int points[n]; // initializing array for students' points
+    printf("Enter points for each students: ");
+    for (int i = 0; i < n; i++){
+        scanf("%d", &points[i]);
+    }
+
+    int team_assignment[n]; // initializing array for students' team assignment
+
+    assign(points, team_assignment, n);
+
+    // printing students in beginner team
+    printf("Beginner team: student "); 
+    for (int i = 0; i < n; i++){
+        if (team_assignment[i] == 1){
+            printf("%d ", i + 1);
+        }
+    }
+    printf("\n");
+
+    // printing students in honor team
+    printf("Honor team: student ");
+    for (int i = 0; i < n; i++){
+        if (team_assignment[i] == 2){
+            printf("%d ", i + 1);
+        }
+    }
+    printf("\n");
+
+    // printing students in excellence team
+    printf("Excellence team: student ");
+    for (int i = 0; i < n; i++){
+        if (team_assignment[i] == 3){
+            printf("%d ", i + 1);
+        }
+    }
+    printf("\n");
+
+    return 0;
+}
