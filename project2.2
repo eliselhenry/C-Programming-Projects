@@ -1,0 +1,39 @@
+// Project 2 Task 2
+/* This program takes user input and determines whether a phrase is valid. The conditions that determine whether or not it is valid include: 
+    The phrase must have all lower case letters and the non alphabetic letters can only be digits, a whitespace, exclamation point, question mark, or a period. 
+    I chose to use a while loop to read the input by each individual character. If any of the characters violate the conditions, my flag variable has been 
+    put in place to break the loop.
+*/
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    printf("Enter input:"); // Prompt the user to input a phrase.
+
+    int isValid = 1;  // Flag vaiable. Assumming input is valid from start by setting it equal to 1.
+    int ch; 
+
+    while ((ch = getchar()) != '\n') { // Making sure the program doesnt count the user pressing the 'enter' button as a character.
+        // Checking the conditions for validity:
+        if (!isalpha(ch) && !isdigit(ch) && ch != ' ' && ch != '!' && ch != '?' && ch != '.') {
+            isValid = 0;  // If any invalid character is found, set isValid to 0 and break loop.
+            break;
+        }
+
+        if (isalpha(ch) && !islower(ch)) {
+            isValid = 0;  // If an alphabetic letter is not lower case, set isValid to 0 and break loop.
+            break;
+        }
+    }
+
+    // If input followed coditions, we print "valid" and exit.
+    // If input did not follow conditions, we print "invalid" and exit.
+    if (isValid) {
+        printf("valid");
+    } else {
+        printf("invalid");
+    }
+
+    return 0;
+}
