@@ -1,0 +1,79 @@
+// Project 2 Task 1
+/* This program prompts the user to insert nickels, dimes, or quarters (5, 10, or 25) until they enter 0 to stop input.
+    The user then gets a choice for the candy selection. The three candy prices are defined using macro definitions. If the user 
+    has enough coins for the price of the candy selected, the program will calculate and print their change. If not, the 
+    program will return the coins to the user.
+*/
+
+#include <stdio.h>
+
+// Macro definitions to define constants for price of each candy
+#define KISSES_PRICE 15
+#define REESES_PRICE 25
+#define SNICKERS_PRICE 50
+
+int main(){
+// Initializing variables    
+    int input;
+    int totalPrice = 0;
+
+// Accept coins from user until a 0 is entered
+    do{
+        printf("Insert coins: ");
+        scanf("%d", &input);
+
+// Switch case to calculate the amount of cents being inserted.
+        switch(input){
+            case 5:
+                totalPrice += 5;
+                break;
+            case 10:
+                totalPrice += 10;
+                break;
+            case 25:
+                totalPrice += 25;
+                break;
+            default:
+                if (input != 0)
+                break;
+        }
+
+    } while (input != 0);
+
+// Print the candy selection options
+    printf("1 - Hershey's kisses (15 cents), 2 - Reese's Peanut Butter Cups (25 cents), 3 - Snickers (50 cents)");
+
+// User input of candy selection
+    printf("\nEnter your choice: ");
+    int candyChoice;
+    scanf("%d", &candyChoice);
+
+    int candyPrice = 0;
+
+// Use a switch case to determine candy price based on the user's selection.
+    switch (candyChoice){
+        case 1:
+            candyPrice = KISSES_PRICE;
+            break;
+        case 2:
+            candyPrice = REESES_PRICE;
+            break;
+        case 3:
+            candyPrice = SNICKERS_PRICE;
+            break;
+        default:
+            printf("Invalid selection, %d cents returned\n", totalPrice); // Input validation for if the user enters a number outside of 1, 2, or 3.
+            return 1;
+    }
+
+// Calculate the total and see if it is enough to buy the selected candy
+    if (totalPrice >= candyPrice){
+        int change = totalPrice - candyPrice;
+        printf("Your change is %d cents\n", change); // If total is sufficient, print change and exit.
+    } 
+    else{
+        printf("Insufficient amount, %d cents returned\n", totalPrice); // If total is insufficient, return initial coins and exit.
+    }
+
+    return 0;
+}
