@@ -1,0 +1,100 @@
+// Project 1
+/* This is a program that takes input from the user regarding packages for an event venue. After
+    recieving the package number, amount of guests in the party, and duration of event, the program 
+    calculates and prints the cost, including food, for that event. If the cost calculated is greater 
+    than the maximum charge for the event, the program will automatically throw out the calculated 
+    total and instead return the maximum charge as the final cost to the user. */
+
+
+#include <stdio.h>
+
+int main() {
+    // Package details
+    int pkg, hours, guests;
+    
+    // Get user input for package selection.
+    printf("Please select from three packages: 1, 2, and 3\n");
+    printf("Enter package selection:");
+    scanf("%d", &pkg);
+
+    // Validate package selection.
+    if(pkg != 1 && pkg != 2 && pkg != 3){
+        printf("Invalid selection.");
+        return 1;
+    }
+    
+    // Get user input for how long the event is.
+    printf("Enter hours:");
+    scanf("%d", &hours);
+    
+    // Validate number of hours rented.
+    if (hours < 1 || hours > 4){
+        printf("Invalid hours.");
+        return 1;    
+    }
+    
+    // Get user input for number of guests.
+    printf("Enter the number of guests:");
+    scanf("%d", &guests);
+    
+    // Package details
+    int firstHourCost, costPerHour, minGuests, maxGuests, foodCostpp, maxCharge;
+    
+    // Using a switch case for the package details based on the selected package (1-3) from user.
+    switch (pkg){
+        case 1: // Package 1 Details
+            firstHourCost = 150;
+            costPerHour = 100;
+            minGuests = 5;
+            maxGuests = 20;
+            foodCostpp = 25;
+            maxCharge = 595;
+            break;
+        case 2: // Package 2 Details
+            firstHourCost = 180;
+            costPerHour = 120;
+            minGuests = 8;
+            maxGuests = 30;
+            foodCostpp = 22;
+            maxCharge = 850;
+            break;
+        case 3: // Package 3 Details
+            firstHourCost = 200;
+            costPerHour = 150;
+            minGuests = 10;
+            maxGuests = 40;
+            foodCostpp = 20;
+            maxCharge = 1050;
+            break;
+        default:
+            printf("Invalid selection.");
+            return 1; // Exit with an error code.
+    }
+    
+    // Calculate total cost
+    int totalCharge = firstHourCost + (hours - 1) * costPerHour;
+    
+    // Validate number of guests.
+    if (guests < minGuests || guests > maxGuests) {
+        printf(" Invalid number of guests.");
+        return 1; // Exit with an error code.
+    }
+    
+    // Calculate the food cost based on number of guests.
+    int foodTotal = guests * foodCostpp;
+    
+    // Add the food cost to total cost.
+    int FinalCharge = totalCharge + foodTotal;
+    
+    // Check if the final charge exceeds the maximum charge.
+    // If it does, print the maximum charge.
+    if (FinalCharge > maxCharge) {
+        printf(" Charge($):%d\n", maxCharge);
+        return 1; // Exit with an error code.
+    }
+    
+    // Print the results if the final charge does not exceed max charge.
+    printf(" Charge($):%d\n", FinalCharge);
+    
+    return 0; // Exit successfully
+}
